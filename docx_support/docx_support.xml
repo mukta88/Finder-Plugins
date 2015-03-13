@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<extension version="3.2" type="plugin" group="finder" method="upgrade">
+	<name>Finder - DOCX Support</name>
+	<group>finder</group>
+	<version>2.5</version>
+	<creationDate>November 2012</creationDate>
+	<author>JXtended</author>
+	<authorEmail>info@jxtended.com</authorEmail>
+	<authorUrl>http://jxtended.com/</authorUrl>
+	<copyright>Copyright 2008 - 2012 JXtended, LLC. All rights reserved.</copyright>
+	<description>FINDER_DOCX_SUPPORT_DESC</description>
+	
+	<files>
+		<filename plugin="docx_support">docx_support.php</filename>
+		<folder>docx2txt</folder>
+	</files>
+	
+	<languages>
+		<language tag="en-GB">en-GB.plg_finder_docx_support.ini</language>
+	</languages>
+
+</extension>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<extension version="3.2" type="plugin" group="finder" method="upgrade">
+	<name>Finder - PDF Support</name>
+	<group>finder</group>
+	<version>2.5</version>
+	<creationDate>November 2012</creationDate>
+	<author>JXtended</author>
+	<authorEmail>info@jxtended.com</authorEmail>
+	<authorUrl>http://jxtended.com/</authorUrl>
+	<copyright>Copyright 2008 - 2012 JXtended, LLC. All rights reserved.</copyright>
+	<description>FINDER_PDF_SUPPORT_DESC</description>
+	
+	<files>
+		<filename plugin="pdf_support">pdf_support.php</filename>
+		<folder>xpdf</folder>
+	</files>
+	
+	<languages>
+		<language tag="en-GB">en-GB.plg_finder_pdf_support.ini</language>
+	</languages>
+
+</extension>
