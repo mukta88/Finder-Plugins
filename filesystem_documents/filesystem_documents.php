@@ -12,6 +12,7 @@ defined('JPATH_BASE') or die;
 
 // Load the base adapter.
 require_once JPATH_ADMINISTRATOR.'/components/com_finder/helpers/indexer/adapter.php';
+
 // Set the adapter support flag.
 define('FINDER_ADAPTER_DOC_SUPPORT', true);
 // Set the adapter support flag.
@@ -261,7 +262,7 @@ class plgFinderFileSystem_Documents extends FinderIndexerAdapter
 		{
 			// Clean the directory and prefix the base path.
 			$dirs[$i] = JPATH_SITE.DS.JPath::clean($dirs[$i]);
-
+//print_r($dirs[$i]);die('mukta checking');
 			// Remove the directory if it does not exist.
 			if (!JFolder::exists($dirs[$i])) {
 				unset($dirs[$i]);
@@ -391,37 +392,32 @@ class plgFinderFileSystem_Documents extends FinderIndexerAdapter
 
 				// Handle Windows.
 				if (JApplication::isWinOS()) {
-					$command = dirname(__FILE__).'/xpdf/pdftotext.exe';
+					$command = dirname(__FILE__).'/xpdf/pdftotext.exe ';
 				}
 				// Handle FreeBSD.
 				elseif (php_uname('s') == 'FreeBSD') {
-					$command = dirname(__FILE__).'/xpdf/pdftotext-freebsd';
+					$command = dirname(__FILE__).'/xpdf/pdftotext-freebsd ';
 				}
 				// Handle Apple OS X.
 				elseif (php_uname('s') == 'Darwin') {
-					$command = dirname(__FILE__).'/xpdf/pdftotext-darwin';
+					$command = dirname(__FILE__).'/xpdf/pdftotext-darwin ';
 				}
 				// Default to Linux.
 				else {
 					
-					$command = dirname(__FILE__).'/xpdf/pdftotext-linux';
+					$command = dirname(__FILE__).'/xpdf/pdftotext-linux ';
 					
 				}
 
 				// Open the file as a process resource.
-				//echo $command;die;
+				//echo $command. "\n" . $path ;die('command');
 				if (JFile::exists($command) && JFile::exists($path)) {
-				//echo "command :".$command.'<br/>';
-					//echo "path :".$path.'<br/>';//die;
-					$return = popen(sprintf('%s -enc "UTF-8" -eol unix -nopgbrk "%s" - 2>&1', $command, $path), 'r');
-					/*
-					 * 'o/p : Resource id #142'; resource
-						Segmentation fault (core dumped) */
-					/*	$handle = popen(sprintf('%s -enc "UTF-8" -eol unix -nopgbrk "%s" - 2>&1', $command, $path), 'r');
-						echo "'$handle'; " . gettype($handle) . "\n";
-						$read = fread($handle, 2096);
-						echo $read;
-						pclose($handle);*/
+					require_once JPATH_SITE.'/plugins/finder/filesystem_documents/class.pdf2text.php';
+					$a = new PDF2Text();
+					$a->setFilename($path);
+					$a->decodePDF();
+					$return = $a->output();
+
 				}
 			} break;
 
